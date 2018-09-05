@@ -88,3 +88,29 @@ var app = {
     item: null
   }
 }
+
+function renderItem(item) {
+  var $card = document.createElement('div')
+  $card.classList.add('card')
+
+  var $img = document.createElement('img')
+  $img.classList.add('card-img-top')
+  $img.setAttribute('src', item.imageUrl)
+  $card.appendChild($img)
+
+  var $body = document.createElement('div')
+  $body.classList.add('card-body')
+
+  var $title = document.createElement('h5')
+  $title.classList.add('card-title')
+  $title.textContent = 'The ' + item.brand + ' ' + item.name
+  $body.appendChild($title)
+
+  var $price = document.createElement('footer')
+  $price.classList.add('blockquote-footer')
+  $price.textContent = '$' + item.price
+  $body.appendChild($price)
+
+  $card.appendChild($body)
+  return $card
+}
