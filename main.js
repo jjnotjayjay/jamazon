@@ -91,6 +91,10 @@ var app = {
   }
 }
 
+function findItem(id, catalog) {
+  return catalog.items.filter(item => item.itemId === id)[0]
+}
+
 function renderItemDetails(item) {
   return createElement('div', { class: 'card details-card' }, [
     createElement('img', { class: 'card-img-top details-img', src: item.imageUrl }, []),
