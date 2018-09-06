@@ -103,16 +103,18 @@ function renderItem(item) {
 }
 
 function renderCatalog(catalog) {
-  var $container = createElement('div', { class: 'container' }, [
+  var $catalog = createElement('div', null, [
     createElement('h1', null, ['Jamazon'])
   ])
+  var $container = createElement('div', { class: 'container' }, [])
   var $row = createElement('div', { class: 'row' }, [])
   catalog.items.forEach(item => {
     var $col = createElement('div', { class: 'col-3' }, [ renderItem(item) ])
     $row.appendChild($col)
   })
   $container.appendChild($row)
-  return $container
+  $catalog.appendChild($container)
+  return $catalog
 }
 
 function renderApp(app) {
