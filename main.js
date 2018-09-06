@@ -93,7 +93,10 @@ function renderItem(item) {
   return createElement('div', { class: 'card' }, [
     createElement('img', { class: 'card-img-top', src: item.imageUrl }, []),
     createElement('div', { class: 'card-body' }, [
-      createElement('h5', { class: 'card-title' }, ['The ' + item.brand + ' ' + item.name]),
+      createElement('span', { class: 'drum-pretext' }, ['the ',
+        createElement('i', { class: 'drum-brand' }, [item.brand, ' ']),
+        createElement('h6', { class: 'drum-name' }, [item.name])
+      ]),
       createElement('footer', { class: 'blockquote-footer' }, ['$' + item.price])
     ])
   ])
