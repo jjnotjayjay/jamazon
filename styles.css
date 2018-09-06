@@ -1,0 +1,47 @@
+body {
+  background: url(ilovedrums-edit.png);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+h1 {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.card {
+  height: 400px;
+  padding: 10px;
+  background-color: rgba(245, 243, 233, 0.9);
+}
+
+.card-body {
+  text-align: center;
+}
+
+.card-img-top {
+  padding: 5px;
+  border: 1.5px solid black;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.drum-pretext {
+  font-size: 12px;
+  color: #444;
+}
+
+.drum-brand {
+  font-size: 1.5em;
+  color: #444;
+}
+
+.drum-name {
+  display: inline-block;
+}
+
+.blockquote-footer {
+  text-align: right;
+  color: green;
+}
