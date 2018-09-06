@@ -99,7 +99,20 @@ function renderItem(item) {
   ])
 }
 
-console.log(renderItem(app.catalog.items[0]))
+function renderCatalog(catalog) {
+  var $container = createElement('div', { class: 'container' }, [
+    createElement('h1', null, ['Jamazon'])
+  ])
+  var $row = createElement('div', { class: 'row' }, [])
+  catalog.items.forEach(item => {
+    var $col = createElement('div', { class: 'col-3' }, [ renderItem(item) ])
+    $row.appendChild($col)
+  })
+  $container.appendChild($row)
+  return $container
+}
+
+console.log(renderCatalog(app.catalog))
 
 function createElement(tagName, attributes, children) {
   var $element = document.createElement(tagName)
