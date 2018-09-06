@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 var app = {
   view: 'catalog',
   catalog: {
@@ -89,8 +91,23 @@ var app = {
   }
 }
 
+function renderItemDetails(item) {
+  return createElement('div', { class: 'card details-card' }, [
+    createElement('img', { class: 'card-img-top details-img', src: item.imageUrl }, []),
+    createElement('div', { class: 'card-body' }, [
+      createElement('span', { class: 'drum-pretext' }, ['the ',
+        createElement('i', { class: 'drum-brand' }, [item.brand, ' ']),
+        createElement('span', { class: 'h6 drum-name' }, [item.name])
+      ]),
+      createElement('p', { class: 'card-subtitle description' }, [item.description]),
+      createElement('p', { class: 'card-text details' }, [item.details]),
+      createElement('i', { class: 'card-text origin' }, ['Origin: ' + item.origin])
+    ])
+  ])
+}
+
 function renderItem(item) {
-  return createElement('div', { class: 'card' }, [
+  return createElement('div', { class: 'card catalog-card' }, [
     createElement('img', { class: 'card-img-top', src: item.imageUrl }, []),
     createElement('div', { class: 'card-body' }, [
       createElement('span', { class: 'drum-pretext' }, ['the ',
