@@ -111,7 +111,7 @@ function renderItemDetails(item) {
 }
 
 function renderItem(item) {
-  return createElement('div', { class: 'card catalog-card' }, [
+  return createElement('div', { class: 'card catalog-card', 'data-item-id': item.itemId }, [
     createElement('img', { class: 'card-img-top', src: item.imageUrl }, []),
     createElement('div', { class: 'card-body' }, [
       createElement('span', { class: 'drum-pretext' }, ['the ',
