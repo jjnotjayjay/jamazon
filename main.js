@@ -161,4 +161,9 @@ function createElement(tagName, attributes, children) {
 }
 
 var $catalog = document.body.querySelector('[data-view="catalog"]')
+
+$catalog.addEventListener('click', e => {
+  console.log(e)
+})
+
 renderApp(app, $catalog)
