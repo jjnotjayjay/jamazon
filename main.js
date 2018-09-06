@@ -95,7 +95,7 @@ function renderItem(item) {
     createElement('div', { class: 'card-body' }, [
       createElement('span', { class: 'drum-pretext' }, ['the ',
         createElement('i', { class: 'drum-brand' }, [item.brand, ' ']),
-        createElement('h6', { class: 'drum-name' }, [item.name])
+        createElement('span', { class: 'h6 drum-name' }, [item.name])
       ]),
       createElement('footer', { class: 'blockquote-footer' }, ['$' + item.price])
     ])
@@ -103,43 +103,41 @@ function renderItem(item) {
 }
 
 function renderCatalog(catalog) {
-  var $catalog = createElement('div', null, [
-    createElement('h1', null, ['Jamazon'])
+  return createElement('div', null, [
+    createElement('h1', null, ['Jamazon']),
+    createElement('div', { class: 'container' }, [
+      createElement('div', { class: 'row' }, catalog.items.map(item =>
+        createElement('div', { class: 'col-3' }, [ renderItem(item) ]))
+      )
+    ])
   ])
-  var $container = createElement('div', { class: 'container' }, [])
-  var $row = createElement('div', { class: 'row' }, [])
-  catalog.items.forEach(item => {
-    var $col = createElement('div', { class: 'col-3' }, [ renderItem(item) ])
-    $row.appendChild($col)
-  })
-  $container.appendChild($row)
-  $catalog.appendChild($container)
-  return $catalog
 }
 
-function renderApp(app) {
-  var $catalog = document.body.querySelector('[data-view="catalog"]')
+function renderApp(app, container) {
   if (app.view === 'catalog') {
-    $catalog.innerHTML = ''
-    $catalog.appendChild(renderCatalog(app.catalog))
+    container.innerHTML = ''
+    container.appendChild(renderCatalog(app.catalog))
   }
 }
-
-renderApp(app)
 
 function createElement(tagName, attributes, children) {
   var $element = document.createElement(tagName)
+
   for (var property in attributes) {
     $element.setAttribute(property, attributes[property])
   }
-  for (var i = 0; i < children.length; i++) {
-    if (children[i] instanceof Node === false) {
-      var $child = document.createTextNode(children[i])
-      $element.appendChild($child)
+
+  children.forEach(child => {
+    if (child instanceof Node === false) {
+      $element.appendChild(document.createTextNode(child))
     }
     else {
-      $element.appendChild(children[i])
+      $element.appendChild(child)
     }
-  }
+  })
+
   return $element
 }
+
+var $catalog = document.body.querySelector('[data-view="catalog"]')
+renderApp(app, $catalog)
