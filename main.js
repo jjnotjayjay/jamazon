@@ -112,7 +112,15 @@ function renderCatalog(catalog) {
   return $container
 }
 
-console.log(renderCatalog(app.catalog))
+function renderApp(app) {
+  var $catalog = document.body.querySelector('[data-view="catalog"]')
+  if (app.view === 'catalog') {
+    $catalog.innerHTML = ''
+    $catalog.appendChild(renderCatalog(app.catalog))
+  }
+}
+
+renderApp(app)
 
 function createElement(tagName, attributes, children) {
   var $element = document.createElement(tagName)
