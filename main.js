@@ -90,27 +90,30 @@ var app = {
 }
 
 function renderItem(item) {
-  var $card = document.createElement('div')
-  $card.classList.add('card')
+  return createElement('div', { class: 'card' }, [
+    createElement('img', { class: 'card-img-top', src: item.imageUrl }, []),
+    createElement('div', { class: 'card-body' }, [
+      createElement('h5', { class: 'card-title' }, ['The ' + item.brand + ' ' + item.name]),
+      createElement('footer', { class: 'blockquote-footer' }, ['$' + item.price])
+    ])
+  ])
+}
 
-  var $img = document.createElement('img')
-  $img.classList.add('card-img-top')
-  $img.setAttribute('src', item.imageUrl)
-  $card.appendChild($img)
+console.log(renderItem(app.catalog.items[0]))
 
-  var $body = document.createElement('div')
-  $body.classList.add('card-body')
-
-  var $title = document.createElement('h5')
-  $title.classList.add('card-title')
-  $title.textContent = 'The ' + item.brand + ' ' + item.name
-  $body.appendChild($title)
-
-  var $price = document.createElement('footer')
-  $price.classList.add('blockquote-footer')
-  $price.textContent = '$' + item.price
-  $body.appendChild($price)
-
-  $card.appendChild($body)
-  return $card
+function createElement(tagName, attributes, children) {
+  var $element = document.createElement(tagName)
+  for (var property in attributes) {
+    $element.setAttribute(property, attributes[property])
+  }
+  for (var i = 0; i < children.length; i++) {
+    if (children[i] instanceof Node === false) {
+      var $child = document.createTextNode(children[i])
+      $element.appendChild($child)
+    }
+    else {
+      $element.appendChild(children[i])
+    }
+  }
+  return $element
 }
