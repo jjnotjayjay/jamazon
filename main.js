@@ -134,6 +134,15 @@ function renderCatalog(catalog) {
   ])
 }
 
+function hideViews(viewToDisplay) {
+  var $views = document.querySelectorAll('[data-view]')
+  $views.forEach(view => {
+    if (view.getAttribute('data-view') !== viewToDisplay) {
+      view.classList.add('hidden')
+    }
+  })
+}
+
 function renderApp(app, container) {
   if (app.view === 'catalog') {
     container.innerHTML = ''
