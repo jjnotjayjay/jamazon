@@ -165,9 +165,9 @@ var $catalog = document.body.querySelector('[data-view="catalog"]')
 $catalog.addEventListener('click', e => {
   var item = e.target.closest('.catalog-card')
   if (item) {
-    var id = item.getAttribute('data-item-id')
+    var id = parseInt(item.getAttribute('data-item-id'))
     app.view = 'details'
-    console.log(app.view)
+    app.details.item = findItem(id, app.catalog)
   }
 })
 
