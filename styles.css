@@ -31,9 +31,27 @@ h1 {
   background: #fff;
 }
 
+.details-card {
+  width: 90%;
+  margin: 4% 0 0 5%;
+  background-color: rgba(245, 243, 233, 0.9);
+  border: 2px solid black;
+}
+
 .details-img {
   width: 30%;
   margin-left: 35%;
+}
+
+.description {
+  margin: 0.5em;
+  font-size: 0.75em;
+  font-style: italic;
+  color: #555;
+}
+
+.details {
+  font-size: 0.9em;
 }
 
 .drum-pretext {
