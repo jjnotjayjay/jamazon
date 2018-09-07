@@ -25,15 +25,15 @@ h1 {
 .card-img-top {
   width: 80%;
   margin: 5% 0 0 10%;
-  padding: 5px;
+  padding: 0.25em;
   border: 1.5px solid black;
-  border-radius: 5px;
+  border-radius: 0.25em;
   background: #fff;
 }
 
 .details-card {
   width: 90%;
-  margin: 4% 0 0 5%;
+  margin: 7% 0 0 5%;
   background-color: rgba(245, 243, 233, 0.9);
   border: 2px solid black;
 }
@@ -71,6 +71,28 @@ h1 {
   font-size: 1em;
   color: green;
   text-shadow: 1px 1px 0.5px rgba(204, 20, 20, 0.5);
+}
+
+.cart-text {
+  margin-bottom: 0;
+}
+
+#cart {
+  position: absolute;
+  top: 1em;
+  right: 1.5em;
+  padding: 0.5em;
+  border-radius: 0.25em;
+  background-color: rgba(245, 243, 233, 0.6);
+}
+
+.add-to-cart {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  font-size: 0.75em;
+  color: white;
+  background-color: green;
 }
 
 .hidden {

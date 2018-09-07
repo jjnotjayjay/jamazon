@@ -86,6 +86,9 @@ var app = {
   },
   details: {
     item: null
+  },
+  cart: {
+    items: []
   }
 }
 
@@ -103,7 +106,8 @@ function renderItemDetails(item) {
       ]),
       createElement('p', { class: 'card-subtitle description' }, [item.description]),
       createElement('p', { class: 'card-text details' }, [item.details]),
-      createElement('i', { class: 'card-text origin' }, ['Origin: ' + item.origin])
+      createElement('i', { class: 'card-text origin' }, ['Origin: ' + item.origin]),
+      createElement('button', { class: 'add-to-cart' }, ['Add to Cart - $' + item.price])
     ])
   ])
 }
@@ -132,6 +136,10 @@ function renderCatalog(catalog) {
   ])
 }
 
+function renderCart(cart) {
+  return createElement('p', { class: 'cart-text' }, ['Cart (' + cart.items.length + ')'])
+}
+
 function hideViews(viewToDisplay) {
   var $views = document.querySelectorAll('[data-view]')
   $views.forEach(view => {
@@ -153,6 +161,9 @@ function renderApp(app, container) {
   if (app.view === 'details') {
     container.appendChild(renderItemDetails(app.details.item))
   }
+  var $cart = document.querySelector('#cart')
+  $cart.innerHTML = ''
+  $cart.appendChild(renderCart(app.cart))
 }
 
 function createElement(tagName, attributes, children) {
@@ -175,6 +186,7 @@ function createElement(tagName, attributes, children) {
 }
 
 var $catalog = document.body.querySelector('[data-view="catalog"]')
+var $details = document.body.querySelector('[data-view="details"]')
 
 $catalog.addEventListener('click', e => {
   var item = e.target.closest('.catalog-card')
@@ -182,7 +194,13 @@ $catalog.addEventListener('click', e => {
     var id = parseInt(item.getAttribute('data-item-id'))
     app.details.item = findItem(id, app.catalog)
     app.view = 'details'
-    var $details = document.body.querySelector('[data-view="details"]')
+    renderApp(app, $details)
+  }
+})
+
+$details.addEventListener('click', e => {
+  if (e.target === document.querySelector('.add-to-cart')) {
+    app.cart.items.push(app.details.item)
     renderApp(app, $details)
   }
 })
