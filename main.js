@@ -135,6 +135,10 @@ function renderCatalog(catalog) {
   ])
 }
 
+function renderCart(cart) {
+  return createElement('p', { class: 'cart-text' }, ['Cart (' + cart.items.length + ')'])
+}
+
 function hideViews(viewToDisplay) {
   var $views = document.querySelectorAll('[data-view]')
   $views.forEach(view => {
