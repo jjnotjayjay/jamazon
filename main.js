@@ -161,6 +161,7 @@ function renderApp(app, container) {
     container.appendChild(renderItemDetails(app.details.item))
   }
   var $cart = document.querySelector('#cart')
+  $cart.innerHTML = ''
   $cart.appendChild(renderCart(app.cart))
 }
 
