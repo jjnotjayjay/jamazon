@@ -201,7 +201,7 @@ $catalog.addEventListener('click', e => {
 $details.addEventListener('click', e => {
   if (e.target === document.querySelector('.add-to-cart')) {
     app.cart.items.push(app.details.item)
-    console.log(app.cart)
+    renderApp(app, $details)
   }
 })
 
