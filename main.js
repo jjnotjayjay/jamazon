@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 var app = {
   view: 'catalog',
   catalog: {
@@ -162,6 +160,8 @@ function renderApp(app, container) {
   if (app.view === 'details') {
     container.appendChild(renderItemDetails(app.details.item))
   }
+  var $cart = document.querySelector('#cart')
+  $cart.appendChild(renderCart(app.cart))
 }
 
 function createElement(tagName, attributes, children) {
