@@ -140,6 +140,9 @@ function hideViews(viewToDisplay) {
     if (view.getAttribute('data-view') !== viewToDisplay) {
       view.classList.add('hidden')
     }
+    else {
+      view.classList.remove('hidden')
+    }
   })
 }
 
@@ -174,6 +177,7 @@ function createElement(tagName, attributes, children) {
 }
 
 var $catalog = document.body.querySelector('[data-view="catalog"]')
+var $details = document.body.querySelector('[data-view="details"]')
 
 $catalog.addEventListener('click', e => {
   var item = e.target.closest('.catalog-card')
@@ -181,7 +185,7 @@ $catalog.addEventListener('click', e => {
     var id = parseInt(item.getAttribute('data-item-id'))
     app.view = 'details'
     app.details.item = findItem(id, app.catalog)
-    console.log(app.view)
+    renderApp(app, $details)
   }
 })
 
