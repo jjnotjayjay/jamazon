@@ -186,6 +186,7 @@ function createElement(tagName, attributes, children) {
 }
 
 var $catalog = document.body.querySelector('[data-view="catalog"]')
+var $details = document.body.querySelector('[data-view="details"]')
 
 $catalog.addEventListener('click', e => {
   var item = e.target.closest('.catalog-card')
@@ -193,9 +194,12 @@ $catalog.addEventListener('click', e => {
     var id = parseInt(item.getAttribute('data-item-id'))
     app.details.item = findItem(id, app.catalog)
     app.view = 'details'
-    var $details = document.body.querySelector('[data-view="details"]')
     renderApp(app, $details)
   }
+})
+
+$details.addEventListener('click', e => {
+  console.log(e)
 })
 
 renderApp(app, $catalog)
