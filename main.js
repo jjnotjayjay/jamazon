@@ -177,9 +177,10 @@ function createElement(tagName, attributes, children) {
 }
 
 var $catalog = document.body.querySelector('[data-view="catalog"]')
-var $details = document.body.querySelector('[data-view="details"]')
 
 $catalog.addEventListener('click', e => {
+  var $details = document.body.querySelector('[data-view="details"]')
+
   var item = e.target.closest('.catalog-card')
   if (item) {
     var id = parseInt(item.getAttribute('data-item-id'))
