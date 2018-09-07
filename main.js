@@ -106,7 +106,8 @@ function renderItemDetails(item) {
       ]),
       createElement('p', { class: 'card-subtitle description' }, [item.description]),
       createElement('p', { class: 'card-text details' }, [item.details]),
-      createElement('i', { class: 'card-text origin' }, ['Origin: ' + item.origin])
+      createElement('i', { class: 'card-text origin' }, ['Origin: ' + item.origin]),
+      createElement('button', { class: 'add-to-cart' }, ['Add to Cart - $' + item.price])
     ])
   ])
 }
