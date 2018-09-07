@@ -168,6 +168,7 @@ $catalog.addEventListener('click', e => {
     var id = parseInt(item.getAttribute('data-item-id'))
     app.view = 'details'
     app.details.item = findItem(id, app.catalog)
+    console.log(app.view)
   }
 })
 
