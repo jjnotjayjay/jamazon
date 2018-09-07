@@ -144,9 +144,13 @@ function hideViews(viewToDisplay) {
 }
 
 function renderApp(app, container) {
+  hideViews(app.view)
+  container.innerHTML = ''
   if (app.view === 'catalog') {
-    container.innerHTML = ''
     container.appendChild(renderCatalog(app.catalog))
+  }
+  if (app.view === 'details') {
+    container.appendChild(renderItemDetails(app.details.item))
   }
 }
 
