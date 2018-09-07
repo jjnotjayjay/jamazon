@@ -89,8 +89,27 @@ var app = {
   }
 }
 
+function findItem(id, catalog) {
+  return catalog.items.filter(item => item.itemId === id)[0]
+}
+
+function renderItemDetails(item) {
+  return createElement('div', { class: 'card details-card' }, [
+    createElement('img', { class: 'card-img-top details-img', src: item.imageUrl }, []),
+    createElement('div', { class: 'card-body' }, [
+      createElement('span', { class: 'drum-pretext' }, ['the ',
+        createElement('i', { class: 'drum-brand' }, [item.brand, ' ']),
+        createElement('span', { class: 'h6 drum-name' }, [item.name])
+      ]),
+      createElement('p', { class: 'card-subtitle description' }, [item.description]),
+      createElement('p', { class: 'card-text details' }, [item.details]),
+      createElement('i', { class: 'card-text origin' }, ['Origin: ' + item.origin])
+    ])
+  ])
+}
+
 function renderItem(item) {
-  return createElement('div', { class: 'card' }, [
+  return createElement('div', { class: 'card catalog-card', 'data-item-id': item.itemId }, [
     createElement('img', { class: 'card-img-top', src: item.imageUrl }, []),
     createElement('div', { class: 'card-body' }, [
       createElement('span', { class: 'drum-pretext' }, ['the ',
@@ -113,10 +132,26 @@ function renderCatalog(catalog) {
   ])
 }
 
+function hideViews(viewToDisplay) {
+  var $views = document.querySelectorAll('[data-view]')
+  $views.forEach(view => {
+    if (view.getAttribute('data-view') !== viewToDisplay) {
+      view.classList.add('hidden')
+    }
+    else {
+      view.classList.remove('hidden')
+    }
+  })
+}
+
 function renderApp(app, container) {
+  hideViews(app.view)
+  container.innerHTML = ''
   if (app.view === 'catalog') {
-    container.innerHTML = ''
     container.appendChild(renderCatalog(app.catalog))
+  }
+  if (app.view === 'details') {
+    container.appendChild(renderItemDetails(app.details.item))
   }
 }
 
@@ -140,4 +175,16 @@ function createElement(tagName, attributes, children) {
 }
 
 var $catalog = document.body.querySelector('[data-view="catalog"]')
+
+$catalog.addEventListener('click', e => {
+  var item = e.target.closest('.catalog-card')
+  if (item) {
+    var id = parseInt(item.getAttribute('data-item-id'))
+    app.details.item = findItem(id, app.catalog)
+    app.view = 'details'
+    var $details = document.body.querySelector('[data-view="details"]')
+    renderApp(app, $details)
+  }
+})
+
 renderApp(app, $catalog)
