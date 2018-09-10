@@ -289,4 +289,11 @@ $cart.addEventListener('click', e => {
   }
 })
 
+var $checkout = document.querySelector('[data-view="checkout"]')
+$checkout.addEventListener('click', e => {
+  if (e.target === document.querySelector('.pay')) {
+    window.alert('Order confirmed!')
+  }
+})
+
 renderApp(app, $catalog)
