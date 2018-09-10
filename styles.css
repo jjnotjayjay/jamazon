@@ -110,6 +110,7 @@ h1 {
   margin: 7% 0 0 18%;
   padding: 1rem;
   text-align: center;
+  border: 2px solid black;
   border-radius: 1em;
   background-color: rgba(245, 243, 233, 0.9);
 }
