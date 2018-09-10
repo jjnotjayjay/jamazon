@@ -252,6 +252,11 @@ $cart.addEventListener('click', e => {
     app.view = 'catalog'
     renderApp(app, $catalog)
   }
+  if (e.target === document.querySelector('.cart-to-checkout')) {
+    app.view = 'checkout'
+    var $checkout = document.querySelector('[data-view="checkout"]')
+    renderApp(app, $checkout)
+  }
 })
 
 renderApp(app, $catalog)
