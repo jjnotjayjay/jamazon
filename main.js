@@ -107,7 +107,7 @@ function renderItemDetails(item) {
       createElement('p', { class: 'card-subtitle description' }, [item.description]),
       createElement('p', { class: 'card-text details' }, [item.details]),
       createElement('i', { class: 'card-text origin' }, ['Origin: ' + item.origin]),
-      createElement('button', { class: 'add-to-cart' }, ['Add to Cart - $' + item.price]),
+      createElement('button', { class: 'add-to-cart' }, ['Add to Cart - $' + item.price.toFixed(2)]),
       createElement('button', { class: 'back-to-catalog' }, ['Back to Catalog'])
     ])
   ])
@@ -121,7 +121,7 @@ function renderItem(item) {
         createElement('i', { class: 'drum-brand' }, [item.brand, ' ']),
         createElement('span', { class: 'h6 drum-name' }, [item.name])
       ]),
-      createElement('footer', { class: 'blockquote-footer' }, ['$' + item.price])
+      createElement('footer', { class: 'blockquote-footer' }, ['$' + item.price.toFixed(2)])
     ])
   ])
 }
@@ -137,8 +137,31 @@ function renderCatalog(catalog) {
   ])
 }
 
-function renderCart(cart) {
+function renderCartText(cart) {
   return createElement('p', { class: 'cart-text' }, ['Cart (' + cart.items.length + ')'])
+}
+
+function renderCartItem(item) {
+  return createElement('div', { class: 'cart-item' }, [
+    createElement('img', { class: 'cart-img rounded float-left', src: item.imageUrl }, []),
+    createElement('span', { class: 'cart-item-title' }, [
+      createElement('span', { class: 'text-muted cart-brand' }, [item.brand]),
+      createElement('span', { class: 'cart-item-name' }, [item.name])
+    ]),
+    createElement('span', { class: 'cart-item-price' }, ['$' + item.price.toFixed(2)])
+  ])
+}
+
+function renderCart(cart) {
+  return createElement('div', { class: 'cart-container' }, [
+    createElement('h1', {}, ['Your Cart:']),
+    createElement('div', {}, app.cart.items.map(item => renderCartItem(item))),
+    createElement('span', { class: 'cart-count' }, ['Count: ' + app.cart.items.length]),
+    createElement('span', {}, ['Total: ',
+      createElement('span', { class: 'font-weight-bold' }, ['$' + app.cart.items.reduce((a, b) => a + b.price, 0).toFixed(2)])
+    ]),
+    createElement('button', { id: 'cart-to-catalog', class: 'back-to-catalog' }, ['Back to Catalog'])
+  ])
 }
 
 function hideViews(viewToDisplay) {
@@ -162,9 +185,12 @@ function renderApp(app, container) {
   if (app.view === 'details') {
     container.appendChild(renderItemDetails(app.details.item))
   }
-  var $cart = document.querySelector('#cart')
-  $cart.innerHTML = ''
-  $cart.appendChild(renderCart(app.cart))
+  if (app.view === 'cart') {
+    container.appendChild(renderCart(app.cart.items))
+  }
+  var $cartButton = document.querySelector('#cart')
+  $cartButton.innerHTML = ''
+  $cartButton.appendChild(renderCartText(app.cart))
 }
 
 function createElement(tagName, attributes, children) {
@@ -205,6 +231,23 @@ $details.addEventListener('click', e => {
     renderApp(app, $details)
   }
   if (e.target === document.querySelector('.back-to-catalog')) {
+    app.view = 'catalog'
+    renderApp(app, $catalog)
+  }
+})
+
+var $cartButton = document.querySelector('#cart')
+var $cart = document.querySelector('[data-view="cart"]')
+
+$cartButton.addEventListener('click', () => {
+  if (app.cart.items.length > 0) {
+    app.view = 'cart'
+    renderApp(app, $cart)
+  }
+})
+
+$cart.addEventListener('click', e => {
+  if (e.target === document.querySelector('#cart-to-catalog')) {
     app.view = 'catalog'
     renderApp(app, $catalog)
   }
