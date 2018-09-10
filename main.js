@@ -137,7 +137,7 @@ function renderCatalog(catalog) {
   ])
 }
 
-function renderCart(cart) {
+function renderCartText(cart) {
   return createElement('p', { class: 'cart-text' }, ['Cart (' + cart.items.length + ')'])
 }
 
@@ -164,7 +164,7 @@ function renderApp(app, container) {
   }
   var $cart = document.querySelector('#cart')
   $cart.innerHTML = ''
-  $cart.appendChild(renderCart(app.cart))
+  $cart.appendChild(renderCartText(app.cart))
 }
 
 function createElement(tagName, attributes, children) {
