@@ -107,7 +107,7 @@ function renderItemDetails(item) {
       createElement('p', { class: 'card-subtitle description' }, [item.description]),
       createElement('p', { class: 'card-text details' }, [item.details]),
       createElement('i', { class: 'card-text origin' }, ['Origin: ' + item.origin]),
-      createElement('button', { class: 'add-to-cart' }, ['Add to Cart - $' + item.price]),
+      createElement('button', { class: 'add-to-cart' }, ['Add to Cart - $' + item.price.toFixed(2)]),
       createElement('button', { class: 'back-to-catalog' }, ['Back to Catalog'])
     ])
   ])
@@ -121,7 +121,7 @@ function renderItem(item) {
         createElement('i', { class: 'drum-brand' }, [item.brand, ' ']),
         createElement('span', { class: 'h6 drum-name' }, [item.name])
       ]),
-      createElement('footer', { class: 'blockquote-footer' }, ['$' + item.price])
+      createElement('footer', { class: 'blockquote-footer' }, ['$' + item.price.toFixed(2)])
     ])
   ])
 }
@@ -145,10 +145,10 @@ function renderCartItem(item) {
   return createElement('div', { class: 'cart-item' }, [
     createElement('img', { class: 'cart-img rounded float-left', src: item.imageUrl }, []),
     createElement('span', { class: 'cart-item-title' }, [
-      createElement('span', { class: 'text-muted' }, [item.brand]),
+      createElement('span', { class: 'text-muted cart-brand' }, [item.brand]),
       createElement('span', { class: 'cart-item-name' }, [item.name])
     ]),
-    createElement('span', { class: 'cart-item-price' }, ['$' + item.price])
+    createElement('span', { class: 'cart-item-price' }, ['$' + item.price.toFixed(2)])
   ])
 }
 
@@ -157,7 +157,10 @@ function renderCart(cart) {
     createElement('h1', {}, ['Your Cart:']),
     createElement('div', {}, app.cart.items.map(item => renderCartItem(item))),
     createElement('span', { class: 'cart-count' }, ['Count: ' + app.cart.items.length]),
-    createElement('span', { class: 'cart-total' }, ['Total: $' + app.cart.items.reduce((a, b) => a + b.price, 0)])
+    createElement('span', {}, ['Total: ',
+      createElement('span', { class: 'font-weight-bold' }, ['$' + app.cart.items.reduce((a, b) => a + b.price, 0).toFixed(2)])
+    ]),
+    createElement('button', { class: 'back-to-catalog' }, ['Back to Catalog'])
   ])
 }
 
