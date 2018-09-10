@@ -160,7 +160,7 @@ function renderCart(cart) {
     createElement('span', {}, ['Total: ',
       createElement('span', { class: 'font-weight-bold' }, ['$' + app.cart.items.reduce((a, b) => a + b.price, 0).toFixed(2)])
     ]),
-    createElement('button', { class: 'back-to-catalog' }, ['Back to Catalog'])
+    createElement('button', { id: 'cart-to-catalog', class: 'back-to-catalog' }, ['Back to Catalog'])
   ])
 }
 
@@ -238,10 +238,18 @@ $details.addEventListener('click', e => {
 
 var $cartButton = document.querySelector('#cart')
 var $cart = document.querySelector('[data-view="cart"]')
+
 $cartButton.addEventListener('click', () => {
   if (app.cart.items.length > 0) {
     app.view = 'cart'
     renderApp(app, $cart)
+  }
+})
+
+$cart.addEventListener('click', e => {
+  if (e.target === document.querySelector('#cart-to-catalog')) {
+    app.view = 'catalog'
+    renderApp(app, $catalog)
   }
 })
 
