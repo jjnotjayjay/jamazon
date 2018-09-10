@@ -104,6 +104,15 @@ h1 {
   background-color: green;
 }
 
+.cart-item {
+  overflow: auto;
+}
+
+.cart-img {
+  width: 100px;
+  height: auto;
+}
+
 .hidden {
   display: none;
 }

@@ -141,6 +141,17 @@ function renderCartText(cart) {
   return createElement('p', { class: 'cart-text' }, ['Cart (' + cart.items.length + ')'])
 }
 
+function renderCartItem(item) {
+  return createElement('div', { class: 'cart-item' }, [
+    createElement('img', { class: 'cart-img rounded float-left', src: item.imageUrl }, []),
+    createElement('span', { class: 'cart-item-title' }, [
+      createElement('span', { class: 'text-muted' }, [item.brand]),
+      createElement('span', { class: 'cart-item-name' }, [item.name])
+    ]),
+    createElement('span', { class: 'cart-item-price' }, ['$' + item.price])
+  ])
+}
+
 function hideViews(viewToDisplay) {
   var $views = document.querySelectorAll('[data-view]')
   $views.forEach(view => {
