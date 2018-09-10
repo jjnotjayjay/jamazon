@@ -190,8 +190,14 @@ function renderApp(app, container) {
     container.appendChild(renderCart(app.cart.items))
   }
   var $cartButton = document.querySelector('#cart')
-  $cartButton.innerHTML = ''
-  $cartButton.appendChild(renderCartText(app.cart))
+  if (app.view === 'cart' || app.view === 'checkout') {
+    $cartButton.classList.add('hidden')
+  }
+  else {
+    $cartButton.classList.remove('hidden')
+    $cartButton.innerHTML = ''
+    $cartButton.appendChild(renderCartText(app.cart))
+  }
 }
 
 function createElement(tagName, attributes, children) {
