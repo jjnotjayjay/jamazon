@@ -156,7 +156,7 @@ function renderCart(cart) {
   return createElement('div', { class: 'cart-container' }, [
     createElement('h1', {}, ['Your Cart:']),
     createElement('div', {}, app.cart.items.map(item => renderCartItem(item))),
-    createElement('span', { class: 'cart-count' }, ['Count: ' + app.cart.items.length]),
+    createElement('span', { class: 'cart-count' }, [app.cart.items.length + ' Items']),
     createElement('span', {}, ['Total: ',
       createElement('span', { class: 'font-weight-bold' }, ['$' + app.cart.items.reduce((a, b) => a + b.price, 0).toFixed(2)])
     ]),
@@ -178,7 +178,7 @@ function renderCheckout(cart) {
         createElement('input', { class: 'col-8 checkout-input', type: 'number' }, [])
       ])
     ]),
-    createElement('p', { class: 'checkout-count float-right' }, ['Count: ' + cart.items.length]),
+    createElement('p', { class: 'checkout-count float-right' }, [cart.items.length + ' Items']),
     createElement('p', { class: 'checkout-total float-right' }, ['Total: ',
       createElement('span', { class: 'font-weight-bold' }, ['$' + cart.items.reduce((a, b) => a + b.price, 0).toFixed(2)])
     ]),
