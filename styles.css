@@ -95,7 +95,8 @@ h1 {
   background-color: red;
 }
 
-.add-to-cart {
+.add-to-cart,
+.cart-to-checkout {
   position: absolute;
   right: 1rem;
   bottom: 1rem;
@@ -113,6 +114,7 @@ h1 {
   border: 2px solid black;
   border-radius: 1em;
   background-color: rgba(245, 243, 233, 0.9);
+  overflow: auto;
 }
 
 .cart-item {
@@ -143,6 +145,31 @@ h1 {
 .cart-img {
   width: 100px;
   height: auto;
+}
+
+.checkout-title {
+  margin: 0.75em;
+}
+
+.checkout-input {
+  height: 2em;
+  font-size: 0.8em;
+}
+
+.checkout-count {
+  margin: 0;
+}
+
+.checkout-total {
+  clear: right;
+}
+
+.pay {
+  position: absolute;
+  bottom: 0.75em;
+  font-size: 0.85em;
+  color: white;
+  background-color: green;
 }
 
 .hidden {

@@ -156,11 +156,33 @@ function renderCart(cart) {
   return createElement('div', { class: 'cart-container' }, [
     createElement('h1', {}, ['Your Cart:']),
     createElement('div', {}, app.cart.items.map(item => renderCartItem(item))),
-    createElement('span', { class: 'cart-count' }, ['Count: ' + app.cart.items.length]),
+    createElement('span', { class: 'cart-count' }, [app.cart.items.length + ' Items']),
     createElement('span', {}, ['Total: ',
       createElement('span', { class: 'font-weight-bold' }, ['$' + app.cart.items.reduce((a, b) => a + b.price, 0).toFixed(2)])
     ]),
-    createElement('button', { id: 'cart-to-catalog', class: 'back-to-catalog' }, ['Back to Catalog'])
+    createElement('button', { id: 'cart-to-catalog', class: 'back-to-catalog' }, ['Back to Catalog']),
+    createElement('button', { class: 'cart-to-checkout' }, ['Checkout'])
+  ])
+}
+
+function renderCheckout(cart) {
+  return createElement('div', { class: 'cart-container' }, [
+    createElement('h2', { class: 'checkout-title' }, ['Checkout:']),
+    createElement('div', { class: 'container' }, [
+      createElement('div', { class: 'row' }, [
+        createElement('p', { class: 'col-4 text-left' }, ['Name:']),
+        createElement('input', { class: 'col-8 checkout-input', type: 'text' }, []),
+        createElement('p', { class: 'col-4 text-left' }, ['Address:']),
+        createElement('input', { class: 'col-8 checkout-input', type: 'text' }, []),
+        createElement('p', { class: 'col-4 text-left' }, ['Credit Card:']),
+        createElement('input', { class: 'col-8 checkout-input', type: 'number' }, [])
+      ])
+    ]),
+    createElement('p', { class: 'checkout-count float-right' }, [cart.items.length + ' Items']),
+    createElement('p', { class: 'checkout-total float-right' }, ['Total: ',
+      createElement('span', { class: 'font-weight-bold' }, ['$' + cart.items.reduce((a, b) => a + b.price, 0).toFixed(2)])
+    ]),
+    createElement('button', { class: 'pay' }, ['Pay'])
   ])
 }
 
@@ -188,9 +210,18 @@ function renderApp(app, container) {
   if (app.view === 'cart') {
     container.appendChild(renderCart(app.cart.items))
   }
+  if (app.view === 'checkout') {
+    container.appendChild(renderCheckout(app.cart))
+  }
   var $cartButton = document.querySelector('#cart')
-  $cartButton.innerHTML = ''
-  $cartButton.appendChild(renderCartText(app.cart))
+  if (app.view === 'cart' || app.view === 'checkout') {
+    $cartButton.classList.add('hidden')
+  }
+  else {
+    $cartButton.classList.remove('hidden')
+    $cartButton.innerHTML = ''
+    $cartButton.appendChild(renderCartText(app.cart))
+  }
 }
 
 function createElement(tagName, attributes, children) {
@@ -250,6 +281,18 @@ $cart.addEventListener('click', e => {
   if (e.target === document.querySelector('#cart-to-catalog')) {
     app.view = 'catalog'
     renderApp(app, $catalog)
+  }
+  if (e.target === document.querySelector('.cart-to-checkout')) {
+    app.view = 'checkout'
+    var $checkout = document.querySelector('[data-view="checkout"]')
+    renderApp(app, $checkout)
+  }
+})
+
+var $checkout = document.querySelector('[data-view="checkout"]')
+$checkout.addEventListener('click', e => {
+  if (e.target === document.querySelector('.pay')) {
+    window.alert('Order confirmed!')
   }
 })
 
