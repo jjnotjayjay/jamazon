@@ -204,6 +204,10 @@ $details.addEventListener('click', e => {
     app.cart.items.push(app.details.item)
     renderApp(app, $details)
   }
+  if (e.target === document.querySelector('.back-to-catalog')) {
+    app.view = 'catalog'
+    renderApp(app, $catalog)
+  }
 })
 
 renderApp(app, $catalog)
