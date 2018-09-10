@@ -167,7 +167,7 @@ function renderCart(cart) {
 
 function renderCheckout(cart) {
   return createElement('div', { class: 'cart-container' }, [
-    createElement('h1', {}, ['Checkout:']),
+    createElement('h2', { class: 'checkout-title' }, ['Checkout:']),
     createElement('div', { class: 'container' }, [
       createElement('div', { class: 'row' }, [
         createElement('p', { class: 'col-4 text-left' }, ['Name:']),
@@ -179,7 +179,7 @@ function renderCheckout(cart) {
       ])
     ]),
     createElement('p', { class: 'checkout-count float-right' }, ['Count: ' + cart.items.length]),
-    createElement('p', { class: 'float-right' }, ['Total: ',
+    createElement('p', { class: 'checkout-total float-right' }, ['Total: ',
       createElement('span', { class: 'font-weight-bold' }, ['$' + cart.items.reduce((a, b) => a + b.price, 0).toFixed(2)])
     ]),
     createElement('button', { class: 'pay' }, ['Pay'])
