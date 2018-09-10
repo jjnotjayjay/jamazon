@@ -95,7 +95,8 @@ h1 {
   background-color: red;
 }
 
-.add-to-cart {
+.add-to-cart,
+.cart-to-checkout {
   position: absolute;
   right: 1rem;
   bottom: 1rem;

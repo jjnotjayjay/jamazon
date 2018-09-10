@@ -160,7 +160,8 @@ function renderCart(cart) {
     createElement('span', {}, ['Total: ',
       createElement('span', { class: 'font-weight-bold' }, ['$' + app.cart.items.reduce((a, b) => a + b.price, 0).toFixed(2)])
     ]),
-    createElement('button', { id: 'cart-to-catalog', class: 'back-to-catalog' }, ['Back to Catalog'])
+    createElement('button', { id: 'cart-to-catalog', class: 'back-to-catalog' }, ['Back to Catalog']),
+    createElement('button', { class: 'cart-to-checkout' }, ['Checkout'])
   ])
 }
 
