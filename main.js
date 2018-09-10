@@ -165,6 +165,27 @@ function renderCart(cart) {
   ])
 }
 
+function renderCheckout(cart) {
+  return createElement('div', { class: 'cart-container' }, [
+    createElement('h1', {}, ['Checkout:']),
+    createElement('div', { class: 'container' }, [
+      createElement('div', { class: 'row' }, [
+        createElement('p', { class: 'col-4 text-left' }, ['Name:']),
+        createElement('input', { class: 'col-8 checkout-input', type: 'text' }, []),
+        createElement('p', { class: 'col-4 text-left' }, ['Address:']),
+        createElement('input', { class: 'col-8 checkout-input', type: 'text' }, []),
+        createElement('p', { class: 'col-4 text-left' }, ['Credit Card:']),
+        createElement('input', { class: 'col-8 checkout-input', type: 'number' }, [])
+      ])
+    ]),
+    createElement('p', { class: 'checkout-count float-right' }, ['Count: ' + cart.items.length]),
+    createElement('p', { class: 'float-right' }, ['Total: ',
+      createElement('span', { class: 'font-weight-bold' }, ['$' + cart.items.reduce((a, b) => a + b.price, 0).toFixed(2)])
+    ]),
+    createElement('button', { class: 'pay' }, ['Pay'])
+  ])
+}
+
 function hideViews(viewToDisplay) {
   var $views = document.querySelectorAll('[data-view]')
   $views.forEach(view => {
@@ -188,6 +209,9 @@ function renderApp(app, container) {
   }
   if (app.view === 'cart') {
     container.appendChild(renderCart(app.cart.items))
+  }
+  if (app.view === 'checkout') {
+    container.appendChild(renderCheckout(app.cart))
   }
   var $cartButton = document.querySelector('#cart')
   if (app.view === 'cart' || app.view === 'checkout') {
