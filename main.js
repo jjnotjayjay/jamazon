@@ -152,6 +152,15 @@ function renderCartItem(item) {
   ])
 }
 
+function renderCart(cart) {
+  return createElement('div', { class: 'cart-container' }, [
+    createElement('h1', {}, ['Your Cart:']),
+    createElement('div', {}, app.cart.items.map(item => renderCartItem(item))),
+    createElement('span', { class: 'cart-count' }, ['Count: ' + app.cart.items.length]),
+    createElement('span', { class: 'cart-total' }, ['Total: $' + app.cart.items.reduce((a, b) => a + b.price, 0)])
+  ])
+}
+
 function hideViews(viewToDisplay) {
   var $views = document.querySelectorAll('[data-view]')
   $views.forEach(view => {
@@ -176,6 +185,7 @@ function renderApp(app, container) {
   var $cart = document.querySelector('#cart')
   $cart.innerHTML = ''
   $cart.appendChild(renderCartText(app.cart))
+  document.body.appendChild(renderCart(app.cart))
 }
 
 function createElement(tagName, attributes, children) {
