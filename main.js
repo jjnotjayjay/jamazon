@@ -182,10 +182,12 @@ function renderApp(app, container) {
   if (app.view === 'details') {
     container.appendChild(renderItemDetails(app.details.item))
   }
-  var $cart = document.querySelector('#cart')
-  $cart.innerHTML = ''
-  $cart.appendChild(renderCartText(app.cart))
-  document.body.appendChild(renderCart(app.cart))
+  if (app.view === 'cart') {
+    container.appendChild(renderCart(app.cart.items))
+  }
+  var $cartButton = document.querySelector('#cart')
+  $cartButton.innerHTML = ''
+  $cartButton.appendChild(renderCartText(app.cart))
 }
 
 function createElement(tagName, attributes, children) {
@@ -228,6 +230,15 @@ $details.addEventListener('click', e => {
   if (e.target === document.querySelector('.back-to-catalog')) {
     app.view = 'catalog'
     renderApp(app, $catalog)
+  }
+})
+
+var $cartButton = document.querySelector('#cart')
+var $cart = document.querySelector('[data-view="cart"]')
+$cartButton.addEventListener('click', () => {
+  if (app.cart.items.length > 0) {
+    app.view = 'cart'
+    renderApp(app, $cart)
   }
 })
 
